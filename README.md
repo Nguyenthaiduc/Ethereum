@@ -36,4 +36,4 @@ const funds = await instance.methods.funds().call()
 ### Faucet
 <img src = "https://i.imgur.com/BfnPIbv.png" />
 <img src = "https://i.imgur.com/GsJ13py.png"/>
-<img scr = "https://i.imgur.com/Y86hljA.png" />
+<img src = "https://i.imgur.com/Y86hljA.png" />
