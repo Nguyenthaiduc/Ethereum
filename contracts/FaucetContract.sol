@@ -13,6 +13,14 @@ contract Faucet {
     //funds[0x12342....] = 300
     //funds[0x12342....] = 200
 
+
+    //this is a special function
+    //it's called when you make a that doesn't specify
+    //function name to call
+
+    //External functiona are part of the contract interface
+    //which mean they can be called via contract and other txs
+
     receive() external payable {}
 
 }
