@@ -13,6 +13,7 @@ contract Faucet {
     //funds[0x12342....] = 300
     //funds[0x12342....] = 200
 
+    address[] public funders;
 
     //this is a special function
     //it's called when you make a that doesn't specify
@@ -23,13 +24,9 @@ contract Faucet {
 
     receive() external payable {}
 
-    function addFunds() external payable {}
-
-    function justTesting() external pure returns(uint) {
-        return 2 + 2;
+    function addFunds() external payable {
+        funders.push(msg.sender);
     }
-
-
 
     //pure view
 }
