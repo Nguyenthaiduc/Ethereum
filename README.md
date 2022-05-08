@@ -29,11 +29,17 @@ const funds = await instance.methods.funds().call()
  ```
 
 >5 `accounts`
-`web3.eth.sendTransaction({from: accounts[0],to: "<addressFaucet>",value: "10000000000000000000"})`
+```
+web3.eth.sendTransaction({from: accounts[0],to: "<addressFaucet>",value: "10000000000000000000"})
+web3.eth.getCode("<addressFaucet>")
 
+```
 ## TOOLS
->Keccak-256 <br/>
+>Keccak-256 [convertDATA](https://emn178.github.io/online-tools/keccak_256.html)<br/>
 >Rapid Tables<br/>
+>Ganache <br />
+>Blockchain Demo [Blockchain](https://andersbrownworth.com/blockchain/).
+>Convert Eth [Eth](https://eth-converter.com/blockchain/).
 
 
 ### Faucet

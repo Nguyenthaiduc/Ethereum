@@ -23,4 +23,13 @@ contract Faucet {
 
     receive() external payable {}
 
+    function addFunds() external payable {}
+
+    function justTesting() external pure returns(uint) {
+        return 2 + 2;
+    }
+
+
+
+    //pure view
 }

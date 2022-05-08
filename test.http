@@ -1,0 +1,25 @@
+### eth.wiki/json-rpc/API
+POST http://127.0.0.1:7545/test HTTP/1.1
+
+{
+    "jsonrpc":"2.0",
+    "method" : "eth_accounts",
+    "params":[],
+    "id" : 1
+}
+### send contracsation
+POST http://127.0.0.1:7545/test HTTP/1.1
+
+{
+    "jsonrpc":"2.0",
+    "method" : "eth_sendTransaction",
+    "params": [{
+        "from": "0x4e2dD250ade36d316bE66c853e046e9bf8Ae3c06",
+        "to": "0x3a86A1496aA5d2dB8f666202b4F931cb06dcd397",
+        "gas": "0x76c0", // 30400
+        "gasPrice": "0x9184e72a000", // 10000000000000
+        "value": "0x8AC7230489E80000", // 2441406250
+        "data": "0xa26759cb"
+            }],
+    "id" : 2
+}
