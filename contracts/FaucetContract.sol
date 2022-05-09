@@ -13,7 +13,8 @@ contract Faucet {
     //funds[0x12342....] = 300
     //funds[0x12342....] = 200
 
-    address[] private funders;
+    uint public numOfFunders;
+    mapping(uint => address) private funders;
 
     //private -> can be accesible only within the smart contract
     //internal -> can be accesible within smart contracts and also derived smart contracts
@@ -28,17 +29,20 @@ contract Faucet {
     receive() external payable {}
 
     function addFunds() external payable {
-        funders.push(msg.sender);
+       uint index = numOfFunders++;
+       funders[index] = msg.sender;
     }
 
-    function getAllFunders() public view returns (address[] memory) {
-        return funders;
-    }
 
     //pure view
 
     function getFundersAtIndex(uint8 index) external view returns (address) {
-        address[] memory _funders = getAllFunders();
-        return _funders[index];
+       
+        return funders[index];
     }
 }
+
+//const instance = await Faucet.deployed()
+// instance.addFunds({from : accounts[0], value: "20000000"})
+// instance.addFunds({from : accounts[1], value: "20000000"})
+// instance.getFundsAtIndex(0)
