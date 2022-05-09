@@ -13,7 +13,10 @@ contract Faucet {
     //funds[0x12342....] = 300
     //funds[0x12342....] = 200
 
-    address[] public funders;
+    address[] private funders;
+
+    //private -> can be accesible only within the smart contract
+    //internal -> can be accesible within smart contracts and also derived smart contracts
 
     //this is a special function
     //it's called when you make a that doesn't specify
