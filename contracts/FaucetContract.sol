@@ -12,10 +12,25 @@ contract Faucet {
     //funds[0x12342....] = 500
     //funds[0x12342....] = 300
     //funds[0x12342....] = 200
-
+    
     uint public numOfFunders;
+    address public owner;
+
     mapping(address => bool) private funders;
     mapping(uint => address) private lutFunders;
+
+    constructor(){
+        owner = msg.sender;
+
+    }
+
+    modifier onlyOwner {
+        require(
+            msg.sender == owner,
+            "Only owner call this function"
+        );
+        _;
+    }
 
     modifier limitWithdraw(uint withdrawAmount){
         require(
@@ -24,6 +39,12 @@ contract Faucet {
              );
              _;
 
+    }
+
+    receive() external payable {}
+
+    function tranferOwnership(address newOwner) external onlyOwner{
+        owner = newOwner;
     }
 
 
@@ -37,7 +58,7 @@ contract Faucet {
     //External functiona are part of the contract interface
     //which mean they can be called via contract and other txs
 
-    receive() external payable {}
+    // receive() external payable {}
 
     function addFunds() external payable {
        address funder = msg.sender;
@@ -54,6 +75,11 @@ contract Faucet {
 
         payable(msg.sender).transfer(withdrawAmount);
         }
+
+
+    function test1() external onlyOwner{
+        //some managing stuff that only admin should have access to 
+    }
     
 
 
