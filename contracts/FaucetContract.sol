@@ -41,10 +41,11 @@ contract Faucet {
     }
 
     function withdraw(uint withdrawAmount) external {
-        if (withdrawAmount < 100000000000000000) {
+        require(withdrawAmount <= 100000000000000000, "Cannot withdraw more than 1 either" );
+
         payable(msg.sender).transfer(withdrawAmount);
         }
-    }
+    
 
 
     //pure view

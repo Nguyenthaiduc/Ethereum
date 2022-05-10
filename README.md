@@ -39,7 +39,7 @@ web3.eth.getCode("<addressFaucet>")
 >Rapid Tables<br/>
 >Ganache <br />
 >Blockchain Demo [Blockchain](https://andersbrownworth.com/blockchain/).
->Convert Eth [Eth](https://eth-converter.com/blockchain/).
+>Convert Eth [Eth](https://eth-converter.com/).
 
 
 ### Faucet
