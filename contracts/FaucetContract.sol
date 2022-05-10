@@ -2,8 +2,9 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "./Owned.sol";
+import "./Logger.sol";
 
-contract Faucet is Owned{
+contract Faucet is Owned,Logger{
     //storage variables
     //Funds mean Qũy Đầu Tư
     // uint public funds = 1000; //positive values only
@@ -34,6 +35,9 @@ contract Faucet is Owned{
     }
 
     receive() external payable {}
+    function emitLog() public override pure returns(bytes32){
+        return "Hello World";
+    }
 
     function tranferOwnership(address newOwner) external onlyOwner{
         owner = newOwner;
