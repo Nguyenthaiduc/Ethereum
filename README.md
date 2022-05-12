@@ -40,6 +40,8 @@ web3.eth.getCode("<addressFaucet>")
 >Ganache <br />
 >Blockchain Demo [Blockchain](https://andersbrownworth.com/blockchain/).
 >Convert Eth [Eth](https://eth-converter.com/).
+>Convert Etherscan [Etherscan](https://etherscan.io/)
+>Bulma [Bulma](https://bulma.io/)
 
 
 ### Faucet
