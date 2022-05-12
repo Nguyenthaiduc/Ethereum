@@ -79,7 +79,6 @@ function App() {
           </span>
           <h1>
             {account ? account : "not connected"}
-            {console.log("account" + account)}
           </h1>
           <div className="balance-view-is-size-2">
             Current Balance: <strong>10</strong> ETH
