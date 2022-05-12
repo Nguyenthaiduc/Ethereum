@@ -1,8 +1,8 @@
 
 import { useEffect, useState } from 'react'
 import Web3 from 'web3'
-import dotenv from 'dotenv'
-dotenv.config()
+import detectEthereumProvider from '@metamask/detect-provider'
+
 
 import './App.css'
 
@@ -22,37 +22,31 @@ function App() {
     web3:null,
   })
 
-  const [account,setAccount] = useState(null) 
+  const [account,setAccount] = useState<string | null>(null) 
 
   useEffect(()=> {
     const loadProvider = async () => {
+      const provider : any = await detectEthereumProvider()
+
+      if(provider) {
+        provider.request({method: "eth_requestAccounts"})
+        setWeb3Api({
+          web3: new Web3(provider),
+          provider
+        })
+      }else {
+        console.error("Please, install Metamask")
+      }
 
       // with MetaMask we have an access to window.ethereum & to wndow.web3
       // metamask injexts a global API into website
       // this API allows websites to request user, account read data to blockchain
       // sign messages and transactions
-      let provider = null
+      
 
-      if(window.ethereum){
-        provider = window.ethereum
+      
 
-        try {
-          await provider.enable();
-        }catch(e){
-          console.error("User denied accounts access" + e)
-        }
-      }
-      else if(window.web3){
-        provider =window.web3.currentProvider
-      }
-      else if (!import.meta.env.VITE_production){
-        provider = new Web3.providers.HttpProvider("http://localhost:7545")
-      }
-
-     setWeb3Api({
-       web3: new Web3(provider),
-       provider
-     })
+    
 
     }
     loadProvider()
@@ -62,9 +56,9 @@ function App() {
   console.log(web3Api.web3)
   //useEffect
   useEffect(()=> {
-    const getAccount = async () => {
+    const getAccount = async ():Promise<void> => {
       const accounts = await web3Api.web3.eth.getAccounts()
-      setAccount(accounts[0])
+      return setAccount(accounts[0])
 
     }
     web3Api.web3 && getAccount()

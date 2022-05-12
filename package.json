@@ -10,6 +10,7 @@
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
+    "@metamask/detect-provider": "^1.2.0",
     "bulma": "^0.9.4",
     "dotenv": "^16.0.1",
     "react": "^18.0.0",
