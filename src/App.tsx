@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import Web3 from 'web3'
 import detectEthereumProvider from '@metamask/detect-provider'
-
+import {loadContract} from './utils/load-contract'
 
 import './App.css'
 
@@ -10,16 +10,19 @@ import './App.css'
 //    web3 = new Web3(window.ethereum);
 //    // Ask User permission to connect to Metamask
 //    await window.ethereum.enable();
+
 // };
 type Web3APi = {
   provider: any;
   web3: any;
+  // contract: any;
 }
 
 function App() {
   const [web3Api,setWeb3Api] = useState<Web3APi>({
     provider: null,
     web3:null,
+    // contract:null,
   })
 
   const [account,setAccount] = useState<string | null>(null) 
@@ -27,12 +30,14 @@ function App() {
   useEffect(()=> {
     const loadProvider = async () => {
       const provider : any = await detectEthereumProvider()
+      // const contract = await loadContract("Faucet")
 
       if(provider) {
         // provider.request({method: "eth_requestAccounts"})
         setWeb3Api({
           web3: new Web3(provider),
-          provider
+          provider,
+          // contract,
         })
       }else {
         console.error("Please, install Metamask")
