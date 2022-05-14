@@ -29,7 +29,7 @@ function App() {
   const [balance,setBalance] = useState<string | null>(null)
   const [shouldReload,setShouldReload] = useState<boolean | null>(false)
 
-  const reloadEffect = () => reload(!shouldReload)
+  const reloadEffect = useCallback(() => reload(!shouldReload),[shouldReload])
 
   useEffect(()=> {
     const loadProvider = async () => {
@@ -73,7 +73,7 @@ function App() {
     // window.location.reload()
     reloadEffect()
     web3Api.contract && loadBalance()
-  },[web3Api,shouldReload])
+  },[web3Api,shouldReload,reloadEffect()])
 
   //console
   // console.log(web3Api.web3)
@@ -93,7 +93,19 @@ function App() {
       from: account,
       value: web3.utils.toWei("1","either"),
     })
-  },[web3Api,account])
+    reloadEffect()
+  },[web3Api,account,reloadEffect()])
+
+  const withdraw = async () => {
+    const { contract,web3} = web3Api
+    const withdrawAmount = web3.ultis.toWei("0.1","either")
+    await contract.withdraw(withdrawAmount,{
+      from: account,
+      
+    })
+    reloadEffect()
+  
+  }
 
   return (
     <>
@@ -128,7 +140,8 @@ function App() {
             className="button is-link mr-2 is-small">
               Donate 1eth
             </button>
-          <button 
+          <button
+          onClick={withdraw} 
           className="button is-primary is-small">Withdraw
           </button>
         </div>

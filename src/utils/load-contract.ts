@@ -13,7 +13,7 @@ export const loadContract = async (name : string,provider : any) => {
 
     const deployedContract = await _contract.deployed()
 
-    return  _contract
+    return  deployedContract
   
 }
 export const loadContract2 = () => {
