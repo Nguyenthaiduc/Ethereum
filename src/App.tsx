@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Web3 from 'web3'
 import detectEthereumProvider from '@metamask/detect-provider'
 import {loadContract} from './utils/load-contract'
@@ -27,6 +27,9 @@ function App() {
 
   const [account,setAccount] = useState<string | null>(null) 
   const [balance,setBalance] = useState<string | null>(null)
+  const [shouldReload,setShouldReload] = useState<boolean | null>(false)
+
+  const reloadEffect = () => reload(!shouldReload)
 
   useEffect(()=> {
     const loadProvider = async () => {
@@ -67,8 +70,10 @@ function App() {
       setBalance(web3.utils.fromWei(balance,"ether")) 
     }
 
+    // window.location.reload()
+    reloadEffect()
     web3Api.contract && loadBalance()
-  },[web3Api])
+  },[web3Api,shouldReload])
 
   //console
   // console.log(web3Api.web3)
@@ -81,6 +86,14 @@ function App() {
     }
     web3Api.web3 && getAccount()
   },[web3Api.web3])
+
+  const addFunds = useCallback (async () => {
+    const { contract,web3} = web3Api
+    await contract.addFunds({
+      from: account,
+      value: web3.utils.toWei("1","either"),
+    })
+  },[web3Api,account])
 
   return (
     <>
@@ -111,7 +124,9 @@ function App() {
           </div>
          
           <button 
-            className="button is-link mr-2 is-small">Donate
+            onClick={addFunds}
+            className="button is-link mr-2 is-small">
+              Donate 1eth
             </button>
           <button 
           className="button is-primary is-small">Withdraw
@@ -123,3 +138,7 @@ function App() {
 }
 
 export default App
+function reload(arg0: boolean) {
+  throw new Error('Function not implemented.')
+}
+
