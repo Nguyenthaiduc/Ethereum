@@ -15,14 +15,14 @@ import './App.css'
 type Web3APi = {
   provider: any;
   web3: any;
-  // contract: any;
+  contract: any;
 }
 
 function App() {
   const [web3Api,setWeb3Api] = useState<Web3APi>({
     provider: null,
     web3:null,
-    // contract:null,
+    contract:null,
   })
 
   const [account,setAccount] = useState<string | null>(null) 
@@ -30,6 +30,7 @@ function App() {
   useEffect(()=> {
     const loadProvider = async () => {
       const provider : any = await detectEthereumProvider()
+      const contract = await loadContract("Faucet",provider)
       // const contract = await loadContract("Faucet")
 
       if(provider) {
@@ -37,7 +38,7 @@ function App() {
         setWeb3Api({
           web3: new Web3(provider),
           provider,
-          // contract,
+          contract,
         })
       }else {
         console.error("Please, install Metamask")
