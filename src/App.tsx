@@ -31,6 +31,10 @@ function App() {
 
   const reloadEffect = useCallback(() => reload(!shouldReload),[shouldReload])
 
+  const setAccountListener = (provider : any) => {
+    provider.on("accountsChanged",(accounts:(string))=> setAccount(accounts[0]))
+  }
+
   useEffect(()=> {
     const loadProvider = async () => {
       const provider : any = await detectEthereumProvider()
@@ -38,6 +42,7 @@ function App() {
       // const contract = await loadContract("Faucet")
 
       if(provider) {
+        setAccountListener(provider)
         // provider.request({method: "eth_requestAccounts"})
         setWeb3Api({
           web3: new Web3(provider),
